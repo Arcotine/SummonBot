@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>SummonBot</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Telegram.Bot" Version="16.0.2"/>
+    <PackageReference Include="GiphyDotNet" Version="2.0.0"/>
+  </ItemGroup>
+</Project>
