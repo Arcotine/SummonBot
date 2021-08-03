@@ -26,13 +26,6 @@ namespace SummonBot {
       botClient.StartReceiving();
 
       Console.WriteLine("Press Ctrl-C to exit");
-      Task.Factory.StartNew(() => {
-        while (true)
-        {
-          Console.WriteLine(DateTime.Now.ToString());
-          Thread.Sleep(1000);
-        }
-      });
       Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit);
       _closing.WaitOne();
 
