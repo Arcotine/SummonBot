@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using Telegram.Bot;
@@ -14,6 +14,13 @@ namespace SummonBot {
     static ITelegramBotClient botClient;
     private static readonly AutoResetEvent _closing = new AutoResetEvent(false);
 
+  public static class APIKeys 
+  {
+  public static string discordURLKey = Environment.GetEnvironmentVariable("DiscordURL");
+  public static string TelegramBotClientKey = Environment.GetEnvironmentVariable("TelegramBotKey");
+  public static string imageLinkKey = Environment.GetEnvironmentVariable("ImageLink");
+  public static string GiphyKey = Environment.GetEnvironmentVariable("GiphyKey");
+  }
     static void Main() {
       botClient = new TelegramBotClient (APIKeys.TelegramBotClientKey);
 
