@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using Telegram.Bot;
@@ -7,9 +9,10 @@ using GiphyDotNet.Manager;
 using GiphyDotNet.Model.Parameters;
 using GiphyDotNet.Model.Results;
 
-namespace Awesome {
+namespace SummonBot {
   class Program {
     static ITelegramBotClient botClient;
+    private static readonly AutoResetEvent _closing = new AutoResetEvent(false);
 
     static void Main() {
       botClient = new TelegramBotClient (APIKeys.TelegramBotClientKey);
@@ -22,8 +25,16 @@ namespace Awesome {
       botClient.OnMessage += Bot_OnMessage;
       botClient.StartReceiving();
 
-      Console.WriteLine("Press any key to exit");
-      Console.ReadKey();
+      Console.WriteLine("Press Ctrl-C to exit");
+      Task.Factory.StartNew(() => {
+        while (true)
+        {
+          Console.WriteLine(DateTime.Now.ToString());
+          Thread.Sleep(1000);
+        }
+      });
+      Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit);
+      _closing.WaitOne();
 
       botClient.StopReceiving();
     }
@@ -138,6 +149,12 @@ namespace Awesome {
               randGiphy(query, false, e);
             }
         }
+    }
+
+    protected static void OnExit(object sender, ConsoleCancelEventArgs args)
+    {
+      Console.WriteLine("Exit");
+      _closing.Set();
     }
   }
 }
