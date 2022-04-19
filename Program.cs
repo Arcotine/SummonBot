@@ -15,17 +15,17 @@ namespace SummonBot {
 
   public static class APIKeys 
   {
-  public static string discordURLKey = Environment.GetEnvironmentVariable("DiscordURL");
-  public static string TelegramBotClientKey = Environment.GetEnvironmentVariable("TelegramBotKey");
-  public static string imageLinkKey = Environment.GetEnvironmentVariable("ImageLink");
-  public static string GiphyKey = Environment.GetEnvironmentVariable("GiphyKey");
+    public static string discordURLKey = Environment.GetEnvironmentVariable("DiscordURL");
+    public static string TelegramBotClientKey = Environment.GetEnvironmentVariable("TelegramBotKey");
+    public static string imageLinkKey = Environment.GetEnvironmentVariable("ImageLink");
+    public static string GiphyKey = Environment.GetEnvironmentVariable("GiphyKey");
   }
     static void Main() {
       botClient = new TelegramBotClient (APIKeys.TelegramBotClientKey);
 
       var me = botClient.GetMeAsync().Result;
       Console.WriteLine(
-        $"Hello, World! I am user {me.Id} and my name is {me.FirstName}."
+        $"Initializing bot {me.Id} as {me.FirstName}."
       );
 
       botClient.OnMessage += Bot_OnMessage;
